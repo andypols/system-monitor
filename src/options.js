@@ -31,7 +31,7 @@ class Option extends React.Component {
         <div style={{ lineHeight: 1.8 }}>
           <h2>Popup settings</h2>
           <div style={{ marginTop: 12, marginBottom: 12 }}>
-            {['cpu', 'memory', 'battery', 'storage'].map(item => (
+            {['cpu', 'memory', 'storage'].map(item => (
               <div key={item}>
                 <input
                   id={item}

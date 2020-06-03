@@ -4,15 +4,13 @@ import { getSystemInfo, storage } from '../utils'
 import CpuComponent from './cpu'
 import MemoryComponent from './memory'
 import StorageComponent from './storage'
-import BatteryComponent from './battery'
 
 class Container extends Component {
   state = {
     status: {
       cpu: false,
       memory: false,
-      storage: false,
-      battery: false,
+      storage: false
     },
     supportBatteryAPI: false,
     cpu: {
@@ -24,40 +22,7 @@ class Container extends Component {
       capacity: 1,
       availableCapacity: 1,
     },
-    storage: { storage: [] },
-    battery: {
-      isSupported: false,
-      isCharging: false,
-      level: 0,
-      chargingtime: 0,
-      dischargingTime: 0,
-    },
-  }
-
-  addBatteryListener = async () => {
-    const _battery = await navigator.getBattery()
-
-    const handleBatteryChange = () => {
-      this.setState({
-        battery: {
-          ...this.state.battery,
-          isCharging: _battery.charging,
-          level: _battery.level,
-          chargingTime: _battery.chargingTime,
-          dischargingTime: _battery.dischargingTime,
-        },
-      })
-    }
-
-    handleBatteryChange()
-    ;[
-      'chargingchange',
-      'levelchange',
-      'chargingtimechange',
-      'dischargingtimechange',
-    ].forEach(event => {
-      _battery.addEventListener(event, handleBatteryChange)
-    })
+    storage: { storage: [] }
   }
 
   async componentDidMount() {
@@ -83,9 +48,6 @@ class Container extends Component {
       <div style={{ width: 230 }}>
         {state.status.cpu && <CpuComponent {...state.cpu} />}
         {state.status.memory && <MemoryComponent {...state.memory} />}
-        {state.status.battery && state.supportBatteryAPI && (
-          <BatteryComponent {...state.battery} />
-        )}
         {state.status.storage && <StorageComponent {...state.storage} />}
         {location.search === '' && (
           <div style={{ lineHeight: 1.5, marginTop: 8 }}>

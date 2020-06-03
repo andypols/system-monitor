@@ -2,7 +2,7 @@
   "name": "system-monitor",
   "private": true,
   "version": "1.5.1",
-  "description": "Monitor system status like CPU, memory, battery",
+  "description": "Monitor system status like CPU, memory",
   "scripts": {
     "start": "webpack",
     "build": "webpack --config webpack.config.production.js",

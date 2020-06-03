@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "MOOKY SYSTEM Monitor",
   "version": "1.5.1",
-  "description": "Monitor system status like CPU, memory, battery",
+  "description": "Monitor system status like CPU, memory",
   "homepage_url": "https://github.com/pd4d10/system-monitor",
   "offline_enabled": true,
   "background": {

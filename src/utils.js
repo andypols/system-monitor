@@ -31,13 +31,9 @@ function getCpuUsage(processors, processorsOld) {
 export async function getSystemInfo(status, cb, processorsOld = []) {
   const [cpu, memory, storage] = await Promise.all(
     ['cpu', 'memory', 'storage'].map(item => {
-      if (status[item]) {
         return new Promise(resolve => {
           chrome.system[item].getInfo(resolve)
         })
-      } else {
-        return Promise.resolve(null)
-      }
     }),
   )
 
@@ -67,10 +63,9 @@ export const storage = {
         const {
           cpu = true,
           memory = true,
-          battery = true,
           storage = true,
         } = res.popup
-        resolve({ cpu, memory, battery, storage })
+        resolve({ cpu, memory, storage })
       })
     })
   },
