@@ -3,7 +3,6 @@ import { render } from 'react-dom'
 import { getSystemInfo, storage } from '../utils'
 import CpuComponent from './cpu'
 import MemoryComponent from './memory'
-import StorageComponent from './storage'
 
 class Container extends Component {
   state = {
@@ -12,7 +11,6 @@ class Container extends Component {
       memory: false,
       storage: false
     },
-    supportBatteryAPI: false,
     cpu: {
       modelName: '',
       usage: [],
@@ -40,7 +38,6 @@ class Container extends Component {
       <div style={{ width: 230 }}>
         {state.status.cpu && <CpuComponent {...state.cpu} />}
         {state.status.memory && <MemoryComponent {...state.memory} />}
-        {state.status.storage && <StorageComponent {...state.storage} />}
         {location.search === '' && (
           <div style={{ lineHeight: 1.5, marginTop: 8 }}>
             <a
