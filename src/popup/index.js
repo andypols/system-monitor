@@ -29,14 +29,7 @@ class Container extends Component {
     const status = await storage.getPopupStatus()
     this.setState({ status }, async () => {
       // Trigger CPU, memory and storage status update periodly
-      getSystemInfo(this.setState.bind(this))
-
-      // Battery
-      if (typeof navigator.getBattery === 'function') {
-        this.setState({
-          supportBatteryAPI: true,
-        })
-      }
+      getSystemInfo(this.setState.bind(this));
     })
   }
 
