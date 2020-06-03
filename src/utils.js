@@ -28,7 +28,7 @@ function getCpuUsage(processors, processorsOld) {
   return usage
 }
 
-export async function getSystemInfo(status, cb, processorsOld = []) {
+export async function getSystemInfo(cb, processorsOld = []) {
   const [cpu, memory, storage] = await Promise.all(
     ['cpu', 'memory', 'storage'].map(item => {
         return new Promise(resolve => {
@@ -52,7 +52,7 @@ export async function getSystemInfo(status, cb, processorsOld = []) {
   if (storage) data.storage = { storage }
 
   cb(data)
-  setTimeout(() => getSystemInfo(status, cb, processors), TIMEOUT)
+  setTimeout(() => getSystemInfo(cb, processors), TIMEOUT)
 }
 
 export const storage = {

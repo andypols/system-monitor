@@ -26,7 +26,7 @@ function fill(count) {
 const cpuIdleArray = fill(ICON_SIZE);
 const activityIcon = new ActivityIcon(colourConfig.cpu);
 
-getSystemInfo({cpu: true}, ({cpu: {modelName, usage}}) => {
+getSystemInfo(({cpu: {modelName, usage}}) => {
   const idle = usage.reduce((a, b) => a + b.idle / b.total, 0) / usage.length
   cpuIdleArray.push(idle)
   cpuIdleArray.shift();
