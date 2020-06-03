@@ -36,7 +36,6 @@ class Container extends Component {
         this.setState({
           supportBatteryAPI: true,
         })
-        this.addBatteryListener()
       }
     })
   }
