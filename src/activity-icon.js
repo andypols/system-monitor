@@ -1,6 +1,15 @@
 const ICON_SIZE = 19;
 const BORDER_WIDTH = 2;
+const ICON_SIZE = 19;
 
+// 3 => [1, 1, 1]
+function fill(count) {
+  const arr = []
+  for(let i = 0; i < count; i += 1) {
+    arr.push(1)
+  }
+  return arr
+}
 
 export default class ActivityIcon {
   constructor(colour) {
@@ -9,6 +18,7 @@ export default class ActivityIcon {
     canvas.height = ICON_SIZE
     this.ctx = canvas.getContext('2d')
     this.colour = colour;
+    this.cpuIdleArray = fill(ICON_SIZE);
   }
 
   clear() {
@@ -27,10 +37,10 @@ export default class ActivityIcon {
     this.ctx.stroke();
   }
 
-  drawBackground(arr) {
+  drawBackground() {
     this.ctx.beginPath();
     this.ctx.moveTo(0, ICON_SIZE);
-    arr.forEach((cpu, i) => {
+    this.cpuIdleArray.forEach((cpu, i) => {
       this.ctx.lineTo(i, cpu * ICON_SIZE);
     })
     this.ctx.lineTo(ICON_SIZE, ICON_SIZE);
@@ -39,9 +49,12 @@ export default class ActivityIcon {
     this.ctx.fill();
   }
 
-  update(cpuIdleArray) {
+  update(idleTotals) {
+    this.cpuIdleArray.push(idleTotals)
+    this.cpuIdleArray.shift();
+
     this.clear();
-    this.drawBackground(cpuIdleArray);
+    this.drawBackground();
     this.drawBorder();
   }
 
