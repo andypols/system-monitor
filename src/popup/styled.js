@@ -3,22 +3,13 @@ import React from 'react'
 const width = 220
 
 export const Tip = ({ children }) => (
-  <p
-    style={{
-      fontSize: 14,
-      margin: '4px 0',
-    }}
-  >
+  <p style={{fontSize: 14, margin: '4px 0'}}>
     {children}
   </p>
 )
 
 export const Title = ({ children }) => (
-  <h2
-    style={{
-      margin: '8px 0',
-    }}
-  >
+  <h2 style={{margin: '8px 0'}}>
     {children}
   </h2>
 )

@@ -1,10 +1,5 @@
 const TIMEOUT = 1000
 
-// Convert byte to GB
-export function toGiga(byte) {
-  return (byte / (1024 * 1024 * 1024)).toFixed(2)
-}
-
 function getCpuUsage(processors, processorsOld) {
   const usage = []
   for (let i = 0; i < processors.length; i++) {

@@ -1,11 +1,10 @@
 import React from 'react'
-import { Tip, Title, Bar } from './styled'
-import { toGiga } from '../utils'
+import {Bar, Tip, Title} from './styled'
+
+const toGiga = (byte) => (byte / (1024 * 1024 * 1024)).toFixed(2);
 
 const MemoryComponent = ({ capacity, availableCapacity }) => {
-  const memoryStyle = {
-    width: `${100 * (1 - availableCapacity / capacity)}%`,
-  }
+  const memoryStyle = {width: `${100 * (1 - availableCapacity / capacity)}%`}
   return (
     <div>
       <Title>Memory</Title>
