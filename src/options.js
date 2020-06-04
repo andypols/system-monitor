@@ -1,6 +1,6 @@
 import React from 'react'
-import { render } from 'react-dom'
-import { storage } from './utils'
+import {render} from 'react-dom'
+import {storage} from './utils'
 
 class Option extends React.Component {
   state = {
@@ -9,15 +9,15 @@ class Option extends React.Component {
   }
 
   setParams = params => {
-    const result = { ...this.state.popup, ...params }
-    this.setState({ popup: result }, () => {
+    const result = {...this.state.popup, ...params}
+    this.setState({popup: result}, () => {
       storage.setPopupStatus(result)
     })
   }
 
   componentDidMount() {
     storage.getPopupStatus().then(popup => {
-      this.setState({ popup, ready: true })
+      this.setState({popup, ready: true})
     })
   }
 
@@ -28,17 +28,17 @@ class Option extends React.Component {
   render() {
     return (
       this.state.ready && (
-        <div style={{ lineHeight: 1.8 }}>
+        <div style={{lineHeight: 1.8}}>
           <h2>Popup settings</h2>
-          <div style={{ marginTop: 12, marginBottom: 12 }}>
-            {['cpu', 'memory', 'storage'].map(item => (
+          <div style={{marginTop: 12, marginBottom: 12}}>
+            {['cpu', 'memory'].map(item => (
               <div key={item}>
                 <input
                   id={item}
                   type="checkbox"
                   checked={this.state.popup[item]}
                   onChange={e => {
-                    this.setParams({ [item]: e.target.checked })
+                    this.setParams({[item]: e.target.checked})
                   }}
                 />
                 <label
@@ -53,14 +53,6 @@ class Option extends React.Component {
               </div>
             ))}
           </div>
-          <hr />
-          <footer>
-            <a href="https://github.com/pd4d10/system-monitor">Source code</a>
-            <br />
-            <a href="https://github.com/pd4d10/system-monitor/issues/new">
-              Submit an issue
-            </a>
-          </footer>
         </div>
       )
     )
@@ -69,4 +61,4 @@ class Option extends React.Component {
 
 const root = document.createElement('div')
 document.body.appendChild(root)
-render(<Option />, root)
+render(<Option/>, root)

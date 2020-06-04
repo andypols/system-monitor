@@ -8,19 +8,15 @@ class Container extends Component {
   state = {
     status: {
       cpu: false,
-      memory: false,
-      storage: false
+      memory: false
     },
     cpu: {
-      modelName: '',
-      usage: [],
-      temperatures: [],
+      usage: []
     },
     memory: {
       capacity: 1,
-      availableCapacity: 1,
-    },
-    storage: { storage: [] }
+      availableCapacity: 1
+    }
   }
 
   async componentDidMount() {

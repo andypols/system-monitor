@@ -26,12 +26,13 @@ function fill(count) {
 const cpuIdleArray = fill(ICON_SIZE);
 const activityIcon = new ActivityIcon(colourConfig.cpu);
 
-getSystemInfo(({cpu: {modelName, usage}}) => {
+getSystemInfo(({cpu: {usage}}) => {
   const idle = usage.reduce((a, b) => a + b.idle / b.total, 0) / usage.length
+
   cpuIdleArray.push(idle)
   cpuIdleArray.shift();
   chrome.browserAction.setTitle({
-    title: `${modelName}\nUsage: ${(100 * (1 - idle)).toFixed(0)}%`
+    title: `Usage: ${(100 * (1 - idle)).toFixed(0)}%`
   })
   activityIcon.update(cpuIdleArray);
   chrome.browserAction.setIcon({

@@ -10,7 +10,6 @@ function getCpuUsage(processors, processorsOld) {
   for (let i = 0; i < processors.length; i++) {
     const processor = processors[i]
 
-    // https://github.com/pd4d10/system-monitor/issues/3
     if (processor.total === 0) continue
 
     const processorOld = processorsOld[i]
@@ -29,8 +28,8 @@ function getCpuUsage(processors, processorsOld) {
 }
 
 export async function getSystemInfo(cb, processorsOld = []) {
-  const [cpu, memory, storage] = await Promise.all(
-    ['cpu', 'memory', 'storage'].map(item => {
+  const [cpu, memory] = await Promise.all(
+    ['cpu', 'memory'].map(item => {
         return new Promise(resolve => {
           chrome.system[item].getInfo(resolve)
         })
@@ -42,10 +41,7 @@ export async function getSystemInfo(cb, processorsOld = []) {
   if (cpu) {
     processors = cpu.processors.map(({ usage }) => usage)
     data.cpu = {
-      modelName: cpu.modelName,
-      usage: getCpuUsage(processors, processorsOld),
-      temperatures: cpu.temperatures || [],
-      // temperatures: [40, 50],
+      usage: getCpuUsage(processors, processorsOld)
     }
   }
   if (memory) data.memory = memory
@@ -62,8 +58,7 @@ export const storage = {
         if (!res.popup) res.popup = {}
         const {
           cpu = true,
-          memory = true,
-          storage = true,
+          memory = true
         } = res.popup
         resolve({ cpu, memory, storage })
       })
